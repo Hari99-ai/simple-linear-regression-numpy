@@ -1,68 +1,24 @@
-# simple-linear-regression-numpy
+# Simple Linear Regression from Scratch
 
-"""
-Simple Linear Regression from Scratch using NumPy and Matplotlib
+This project demonstrates how to implement **Simple Linear Regression** from scratch in Python using **NumPy** and **Matplotlib**.
 
-This script demonstrates how to perform simple linear regression on a set of data points 
-without using any machine learning libraries. It calculates the regression coefficients 
-manually and plots the best-fit line.
+## 📊 Overview
 
-Author: [Your Name]
-Date: [Today's Date]
-"""
+Simple Linear Regression models the relationship between two variables by fitting a straight line to the data. The goal is to find the best-fit line described by:
 
-import numpy as np
-import matplotlib.pyplot as plt
+y = b₀ + b₁x
 
-def estimate_coef(x, y):
-    """
-    Estimate the coefficients of a simple linear regression model.
+markdown
+Copy
+Edit
 
-    Parameters:
-    x : numpy array of x values
-    y : numpy array of y values
+Where:
+- `b₀` is the intercept
+- `b₁` is the slope
 
-    Returns:
-    Tuple containing intercept (b_0) and slope (b_1)
-    """
-    n = np.size(x)
-    m_x, m_y = np.mean(x), np.mean(y)
-    SS_xy = np.sum(y * x) - n * m_y * m_x
-    SS_xx = np.sum(x * x) - n * m_x * m_x
+This script:
+- Computes the coefficients manually
+- Prints them
+- Visualizes the data and fitted line
 
-    b_1 = SS_xy / SS_xx
-    b_0 = m_y - b_1 * m_x
 
-    return b_0, b_1
-
-def plot_regression_line(x, y, b):
-    """
-    Plot the data points and the regression line.
-
-    Parameters:
-    x : numpy array of x values
-    y : numpy array of y values
-    b : Tuple containing regression coefficients
-    """
-    plt.scatter(x, y, color="g", marker="o", s=30, label="Data points")
-    y_pred = b[0] + b[1] * x
-    plt.plot(x, y_pred, color="b", label="Regression line")
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.legend()
-    plt.grid(True)
-    plt.title("Simple Linear Regression")
-    plt.show()
-
-def main():
-    x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-    y = np.array([1, 3, 2, 5, 7, 8, 8, 9, 10, 12])
-
-    b = estimate_coef(x, y)
-    print("Estimated coefficients:\nb_0 = {:.2f} \nb_1 = {:.2f}".format(b[0], b[1]))
-    print("Number of data points:", np.size(x))
-
-    plot_regression_line(x, y, b)
-
-if __name__ == "__main__":
-    main()
